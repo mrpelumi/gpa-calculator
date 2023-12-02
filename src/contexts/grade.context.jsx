@@ -9,12 +9,32 @@ const addCourseItem = (courseList, numOfCourses) => {
   return [...courseList, courseItem]
 }
 
+// filters course object
 const removeCourseItem = (courseList, courseId) => {
   const existingItem = courseList.find(course => course.id === courseId);
 
   if (existingItem) {
     return courseList.filter(course => course.id !== courseId)
   }
+}
+
+// returns the gpa value
+const gpaCalculation = (courseList) => {
+  const gradeCourseList = courseList.map(course => {
+    if (course.grade === 'A'){
+      return {...course, grade:5}
+    } else if (course.grade === 'B') {
+      return {...course, grade:4}
+    } else if (course.grade === 'C') {
+      return {...course, grade:3}
+    } else if (course.grade === 'D') {
+      return {...course, grade:2}
+    }
+    return {...course, grade:0}
+  })
+  const gradeCreditTotal =  gradeCourseList.reduce((total, currentValue) => total + (currentValue.grade * Number(currentValue.credits)), 0)
+  const creditTotal = gradeCourseList.reduce((total, currentValue) => total + Number(currentValue.credits), 0)
+  return (gradeCreditTotal / creditTotal).toFixed(2);
 }
 
 // returns a new course list with updated course name
@@ -47,7 +67,8 @@ export const GradeContext = createContext({
   numOfCourses: 0,
   addCourseItemHandler: () => null,
   changeCourseInputHandler: () => null,
-  removeCourseHandler: () => null
+  removeCourseHandler: () => null,
+  gpaCalculationHandler: () => null
 })
 
 // the reducer - updates the state
@@ -66,6 +87,11 @@ const GradeReducer = (state, action) => {
           ...payload
         }
       case 'REMOVE_COURSE_ITEM':
+        return {
+          ...state,
+          ...payload
+        }
+      case 'SET_GPA_VALUE':
         return {
           ...state,
           ...payload
@@ -136,7 +162,15 @@ export const GradeProvider = ({children}) => {
     courseValReducer(newCourseList);
   }
 
-  const value = {addCourseItemHandler, courseList, changeCourseInputHandler, removeCourseHandler}
+  // updates the gpa value
+  const gpaCalculationHandler = (event) => {
+    event.preventDefault();
+    const newGpa = gpaCalculation(courseList);
+    const newPayload = {gpaValue: newGpa};
+    dispatch({type:'SET_GPA_VALUE', payload:newPayload});
+  }
+
+  const value = {addCourseItemHandler, courseList, changeCourseInputHandler, removeCourseHandler, gpaCalculationHandler, gpaValue}
 
   return (<GradeContext.Provider value={value}>{children}</GradeContext.Provider>);
 }
