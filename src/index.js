@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import {BrowserRouter} from 'react-router-dom';
 import App from './App';
+import { GradeProvider } from './contexts/grade.context';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <GradeProvider>
+        <App />
+      </GradeProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
