@@ -53,7 +53,7 @@ const Home = () => {
       
       <div className='result-container text-center'>
         {
-          (isNaN(gpaValue)) ? (<h1 className='fs-2'>GPA: 0</h1>) : (<h1 className='fs-2'>GPA: {gpaValue}</h1>)
+          (isNaN(gpaValue)) ? (<h1 className='fs-2'>GPA: 0</h1>) : (<h1 className='fs-2'>GPA: {gpaValue}/5.0</h1>)
         }
         
       </div>
