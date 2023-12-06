@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { GradeContext } from "../../contexts/grade.context"
 
-const Select = ({id}) => {
+const Select = ({id, className}) => {
   const {changeCourseInputHandler} = useContext(GradeContext);
 
   const optionList = [
@@ -17,7 +17,7 @@ const Select = ({id}) => {
   }
 
   return (
-  <select name="course-grade" id={id} onChange={onChangeHandler} required>
+  <select name="course-grade" id={id} className={className} onChange={onChangeHandler} required>
     {optionList.map(item => {
       const {label, value} = item;
       return <option value={value} key={item.value}>{label}</option>

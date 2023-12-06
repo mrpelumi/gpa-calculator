@@ -1,10 +1,102 @@
+$primary-color: #F2F7F7;
+$text-color: #03045E;
+$form-header-color:#046865;
+$input-text-color: #4A9292;
+
+.calculator-container {
+  background-color: $primary-color;
+  width: 47rem;
+  margin: auto auto;
+}
+.calc-header{
+  color: $text-color;
+  text-align: center;
+}
+.semester-container {
+  background-color: white;
+}
+.semester-txt{
+  color: $text-color;
+}
 .semester-header {
-  display: flex;
-  width: 50%;
-  justify-content: space-between;
+  span {
+    color: $form-header-color;
+    font-size: 1.1rem;
+  }
+  .grade {
+    margin-left: 5rem;
+  }
+  .credits {
+    margin-left: 5.2rem;
+  }
 }
 .semester-fields {
   display: flex;
-  width: 60%;
   justify-content: space-between;
+
+  .course-input {
+    background-color: $primary-color;
+    font-size: 0.9rem;
+    color: $input-text-color;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &::placeholder {
+      color: $input-text-color;
+    }
+  }
+  .grade-input {
+    background-color: $primary-color;
+    font-size: 0.9rem;
+    width: 5rem;
+    color: $input-text-color;
+
+    &:focus{
+      outline: 0;
+    }
+  }
+  .credit-input {
+    background-color: $primary-color;
+    font-size: 0.9rem;
+    width: 5rem;
+    color: $input-text-color;
+
+    &:focus{
+      outline: 0;
+    }
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1.5rem;
+    width: 10rem;
+  }
+  .btn-gpa{
+    color: $text-color;
+    border-color: $text-color;
+
+    &:hover{
+      background-color: $text-color;
+    }
+  }
+  .btn-course {
+    color: $form-header-color;
+    border-color: $form-header-color;
+
+    &:hover {
+      background-color: $form-header-color;
+    }
+  }
+
+}
+.result-container {
+  color: $text-color;
 }
